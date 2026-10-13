@@ -1,0 +1,26 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.LMSlay/tubetext-reviews-insights",
+  "title": "Reviews + AI Insights: Steam, Agoda, Google Play",
+  "description": "Steam game, Agoda/Booking.com hotel and Google Play app reviews with optional AI insight reports.",
+  "repository": {
+    "url": "https://github.com/LMSlay/tubetext-mcp",
+    "source": "github"
+  },
+  "version": "1.0.0",
+  "websiteUrl": "https://apify.com/tubetext/steam-reviews-scraper",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.apify.com/?tools=fetch-actor-details,tubetext/steam-reviews-scraper,tubetext/agoda-reviews-scraper,tubetext/google-play-reviews-ai",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Optional. Clients with OAuth sign in to Apify instead. Otherwise your own Apify token as Bearer <token>.",
+          "isRequired": false,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}

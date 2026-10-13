@@ -1,0 +1,77 @@
+name: Publish to MCP Registry
+
+# Publishes every registry/*/server.json (6 TubeText bundles) to registry.modelcontextprotocol.io.
+# Trigger: push a tag like v1.1.1. The tag (minus the "v") becomes the version of every entry,
+# because the registry rejects a version that already exists.
+# Auth: GitHub Actions OIDC, which grants the io.github.<repo owner>/* namespace. No secrets.
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to publish (e.g. 1.0.1). Must not exist in the registry yet."
+        required: true
+
+permissions:
+  id-token: write # OIDC token for mcp-publisher login github-oidc
+  contents: read
+
+concurrency:
+  group: mcp-registry
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      PUBLISHER_VERSION: v1.8.1
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resolve version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            v="${{ github.event.inputs.version }}"
+          else
+            v="${GITHUB_REF_NAME#v}"
+          fi
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+          echo "Publishing version $v"
+
+      - name: Install mcp-publisher
+        run: |
+          curl -sSL "https://github.com/modelcontextprotocol/registry/releases/download/${PUBLISHER_VERSION}/mcp-publisher_linux_amd64.tar.gz" | tar xz mcp-publisher
+          ./mcp-publisher --help | head -3
+
+      - name: Stamp version into server.json files
+        run: |
+          for f in registry/*/server.json; do
+            jq --arg v "${{ steps.version.outputs.version }}" '.version = $v' "$f" > "$f.tmp" && mv "$f.tmp" "$f"
+            echo "$f -> $(jq -r '.name + " " + .version' "$f")"
+          done
+
+      - name: Validate
+        run: |
+          for f in registry/*/server.json; do
+            ./mcp-publisher validate "$f"
+          done
+
+      - name: Login (GitHub OIDC)
+        run: ./mcp-publisher login github-oidc
+
+      - name: Publish
+        run: |
+          for f in registry/*/server.json; do
+            echo "::group::$f"
+            ./mcp-publisher publish "$f"
+            echo "::endgroup::"
+          done
+
+      - name: Verify in registry
+        run: |
+          sleep 5
+          curl -sS "https://registry.modelcontextprotocol.io/v0/servers?search=tubetext" \
+            | jq -r '.servers[] | .server | "\(.name) \(.version)"'

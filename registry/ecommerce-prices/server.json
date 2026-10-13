@@ -1,0 +1,26 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.LMSlay/tubetext-ecommerce-prices",
+  "title": "E-commerce Prices: Amazon, Taobao, AliExpress, Idealo",
+  "description": "Products, prices and sellers from Amazon, Taobao/Tmall, AliExpress, TikTok Shop and Idealo (EU).",
+  "repository": {
+    "url": "https://github.com/LMSlay/tubetext-mcp",
+    "source": "github"
+  },
+  "version": "1.0.0",
+  "websiteUrl": "https://apify.com/tubetext/amazon-product-search-scraper",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.apify.com/?tools=fetch-actor-details,tubetext/amazon-product-search-scraper,tubetext/taobao-tmall-scraper,tubetext/aliexpress-search-scraper,tubetext/tiktok-shop-product-scraper,tubetext/idealo-price-scraper",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Optional. Clients with OAuth sign in to Apify instead. Otherwise your own Apify token as Bearer <token>.",
+          "isRequired": false,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}
