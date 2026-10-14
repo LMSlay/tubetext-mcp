@@ -21,6 +21,12 @@ BUNDLES = [
   ("reviews-insights", "Reviews + AI Insights: Steam, Agoda, Google Play",
    "Steam game, Agoda/Booking.com hotel and Google Play app reviews with optional AI insight reports.",
    ["steam-reviews-scraper", "agoda-reviews-scraper", "google-play-reviews-ai"]),
+  ("china-data", "China Data: Taobao, Bilibili, WeChat, Trending",
+   "Taobao/Tmall, Bilibili videos + transcripts, WeChat articles, China hot search, suppliers by photo.",
+   ["taobao-tmall-scraper", "bilibili-scraper", "bilibili-video-transcript", "china-trending-topics", "wechat-articles-scraper", "alibaba-yiwu-image-search"]),
+  ("travel-local-prices", "Travel & Local Prices: Flights, Hotels, Gas",
+   "Google Flights fares and price calendar, Google Hotels rates by date, US/Canada gas station prices.",
+   ["google-flights-scraper", "google-hotels-scraper", "gas-prices-scraper"]),
 ]
 for slug, title, desc, actors in BUNDLES:
     assert len(desc) <= 100, (slug, len(desc))
