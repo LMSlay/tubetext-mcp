@@ -4,8 +4,8 @@ TubeText servers are **remote** MCP servers hosted on Apify (`mcp.apify.com`, St
 
 ## 1. Pick a server URL
 Choose the bundle that matches the user's request (full list in README.md → "Server URLs"):
-- TikTok transcripts + AI video breakdown: `https://mcp.apify.com/?tools=fetch-actor-details,tubetext/tiktok-transcript,tubetext/video-breakdown-ai`
-- YouTube transcripts + channel analytics: `https://mcp.apify.com/?tools=fetch-actor-details,tubetext/youtube-transcript-fast,tubetext/youtube-channel-analytics,tubetext/socialblade-scraper`
+- TikTok transcripts + AI video breakdown: `https://mcp.apify.com/?tools=fetch-actor-details,tubetext/tiktok-transcript,tubetext/video-breakdown-ai,tubetext/shot-by-shot-video-analysis`
+- YouTube transcripts + channel analytics: `https://mcp.apify.com/?tools=fetch-actor-details,tubetext/youtube-transcript-fast,tubetext/youtube-channel-analytics,tubetext/socialblade-scraper,tubetext/shot-by-shot-video-analysis`
 - For the other 6 bundles (social video transcripts, ad intelligence, e-commerce prices, reviews, China data, travel prices), copy the URL from README.md.
 
 ## 2. Authentication
@@ -22,7 +22,7 @@ A free Apify account includes monthly platform credit. Each tool is a pay-per-ev
   "mcpServers": {
     "tubetext-tiktok": {
       "type": "streamableHttp",
-      "url": "https://mcp.apify.com/?tools=fetch-actor-details,tubetext/tiktok-transcript,tubetext/video-breakdown-ai"
+      "url": "https://mcp.apify.com/?tools=fetch-actor-details,tubetext/tiktok-transcript,tubetext/video-breakdown-ai,tubetext/shot-by-shot-video-analysis"
     }
   }
 }
@@ -31,10 +31,10 @@ If you use a token, add `"headers": { "Authorization": "Bearer <APIFY_TOKEN>" }`
 
 **Claude Code:**
 ```bash
-claude mcp add --transport http tubetext-tiktok "https://mcp.apify.com/?tools=fetch-actor-details,tubetext/tiktok-transcript,tubetext/video-breakdown-ai"
+claude mcp add --transport http tubetext-tiktok "https://mcp.apify.com/?tools=fetch-actor-details,tubetext/tiktok-transcript,tubetext/video-breakdown-ai,tubetext/shot-by-shot-video-analysis"
 ```
 
 ## 4. Verify
-List the tools. You should see `tubetext--tiktok-transcript` and `tubetext--video-breakdown-ai` (plus Apify helper tools such as `get-dataset-items`). Then do a test call with one public TikTok URL.
+List the tools. You should see `tubetext--tiktok-transcript`, `tubetext--video-breakdown-ai` and `tubetext--shot-by-shot-video-analysis` (plus Apify helper tools such as `get-dataset-items`). Then do a test call with one public TikTok URL.
 
 Runs can take longer than 45 s. If a call returns a run ID, poll it with `get-actor-run` and read results with `get-dataset-items`. For large jobs, ask the user for a cost cap and pass `maxTotalChargeUsd`.
