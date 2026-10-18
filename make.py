@@ -3,12 +3,12 @@ import json, os
 NS = "io.github.LMSlay"
 REPO = "https://github.com/LMSlay/tubetext-mcp"
 BUNDLES = [
-  ("tiktok-transcripts", "TikTok Transcripts, Video Breakdown & Shot Analysis",
-   "TikTok transcripts (captions or Whisper AI), quick AI breakdowns and director-level shot analysis.",
-   ["tiktok-transcript", "video-breakdown-ai", "shot-by-shot-video-analysis"]),
-  ("youtube-transcripts", "YouTube Transcripts & Channel Analytics",
-   "YouTube transcripts from videos, Shorts, playlists or channels, plus channel and Social Blade stats.",
-   ["youtube-transcript-fast", "youtube-channel-analytics", "socialblade-scraper", "shot-by-shot-video-analysis"]),
+  ("tiktok-transcripts", "TikTok Transcripts, Comments, Video Breakdown & Shot Analysis",
+   "TikTok transcripts, comment sentiment by moment, AI breakdowns and director-level shot analysis.",
+   ["tiktok-transcript", "youtube-tiktok-comments-api", "video-breakdown-ai", "shot-by-shot-video-analysis"]),
+  ("youtube-transcripts", "YouTube Transcripts, Comments & Channel Analytics",
+   "YouTube transcripts, comment sentiment and the moments viewers react to, plus channel stats.",
+   ["youtube-transcript-fast", "youtube-tiktok-comments-api", "youtube-channel-analytics", "socialblade-scraper", "shot-by-shot-video-analysis"]),
   ("social-video-transcripts", "Instagram, Facebook, X, Reddit & Podcast Transcripts",
    "Transcribe Instagram Reels, Facebook, X and Reddit videos, podcasts (RSS, Apple) and any video URL.",
    ["instagram-reels-transcript", "facebook-video-transcript", "twitter-x-video-transcript", "podcast-transcript", "any-video-podcast-transcript", "reddit-video-transcript"]),
@@ -27,6 +27,9 @@ BUNDLES = [
   ("travel-local-prices", "Travel & Local Prices: Flights, Hotels, Gas",
    "Google Flights fares and price calendar, Google Hotels rates by date, US/Canada gas station prices.",
    ["google-flights-scraper", "google-hotels-scraper", "gas-prices-scraper"]),
+  ("esports-match-data", "Esports Match Timelines: Valorant & CS2",
+   "Round-by-round Valorant and CS2 scores read from public broadcast VODs on YouTube and Twitch.",
+   ["esports-match-timeline", "youtube-transcript-fast", "youtube-tiktok-comments-api"]),
 ]
 for slug, title, desc, actors in BUNDLES:
     assert len(desc) <= 100, (slug, len(desc))

@@ -1,6 +1,6 @@
 name: Publish to MCP Registry
 
-# Publishes every registry/*/server.json (6 TubeText bundles) to registry.modelcontextprotocol.io.
+# Publishes every registry/*/server.json (9 TubeText bundles) to registry.modelcontextprotocol.io.
 # Trigger: push a tag like v1.1.1. The tag (minus the "v") becomes the version of every entry,
 # because the registry rejects a version that already exists.
 # Auth: GitHub Actions OIDC, which grants the io.github.<repo owner>/* namespace. No secrets.

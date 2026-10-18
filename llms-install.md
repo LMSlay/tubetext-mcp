@@ -4,9 +4,9 @@ TubeText servers are **remote** MCP servers hosted on Apify (`mcp.apify.com`, St
 
 ## 1. Pick a server URL
 Choose the bundle that matches the user's request (full list in README.md → "Server URLs"):
-- TikTok transcripts + AI video breakdown: `https://mcp.apify.com/?tools=fetch-actor-details,tubetext/tiktok-transcript,tubetext/video-breakdown-ai,tubetext/shot-by-shot-video-analysis`
-- YouTube transcripts + channel analytics: `https://mcp.apify.com/?tools=fetch-actor-details,tubetext/youtube-transcript-fast,tubetext/youtube-channel-analytics,tubetext/socialblade-scraper,tubetext/shot-by-shot-video-analysis`
-- For the other 6 bundles (social video transcripts, ad intelligence, e-commerce prices, reviews, China data, travel prices), copy the URL from README.md.
+- TikTok transcripts, comments + AI video breakdown: `https://mcp.apify.com/?tools=fetch-actor-details,tubetext/tiktok-transcript,tubetext/youtube-tiktok-comments-api,tubetext/video-breakdown-ai,tubetext/shot-by-shot-video-analysis`
+- YouTube transcripts, comments + channel analytics: `https://mcp.apify.com/?tools=fetch-actor-details,tubetext/youtube-transcript-fast,tubetext/youtube-tiktok-comments-api,tubetext/youtube-channel-analytics,tubetext/socialblade-scraper,tubetext/shot-by-shot-video-analysis`
+- For the other 7 bundles (social video transcripts, ad intelligence, e-commerce prices, reviews, China data, travel prices, esports match data), copy the URL from README.md.
 
 ## 2. Authentication
 Use one of these:
@@ -22,7 +22,7 @@ A free Apify account includes monthly platform credit. Each tool is a pay-per-ev
   "mcpServers": {
     "tubetext-tiktok": {
       "type": "streamableHttp",
-      "url": "https://mcp.apify.com/?tools=fetch-actor-details,tubetext/tiktok-transcript,tubetext/video-breakdown-ai,tubetext/shot-by-shot-video-analysis"
+      "url": "https://mcp.apify.com/?tools=fetch-actor-details,tubetext/tiktok-transcript,tubetext/youtube-tiktok-comments-api,tubetext/video-breakdown-ai,tubetext/shot-by-shot-video-analysis"
     }
   }
 }
@@ -31,7 +31,7 @@ If you use a token, add `"headers": { "Authorization": "Bearer <APIFY_TOKEN>" }`
 
 **Claude Code:**
 ```bash
-claude mcp add --transport http tubetext-tiktok "https://mcp.apify.com/?tools=fetch-actor-details,tubetext/tiktok-transcript,tubetext/video-breakdown-ai,tubetext/shot-by-shot-video-analysis"
+claude mcp add --transport http tubetext-tiktok "https://mcp.apify.com/?tools=fetch-actor-details,tubetext/tiktok-transcript,tubetext/youtube-tiktok-comments-api,tubetext/video-breakdown-ai,tubetext/shot-by-shot-video-analysis"
 ```
 
 ## 4. Verify

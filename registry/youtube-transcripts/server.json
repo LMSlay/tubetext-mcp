@@ -1,8 +1,8 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.LMSlay/tubetext-youtube-transcripts",
-  "title": "YouTube Transcripts & Channel Analytics",
-  "description": "YouTube transcripts from videos, Shorts, playlists or channels, plus channel and Social Blade stats.",
+  "title": "YouTube Transcripts, Comments & Channel Analytics",
+  "description": "YouTube transcripts, comment sentiment and the moments viewers react to, plus channel stats.",
   "repository": {
     "url": "https://github.com/LMSlay/tubetext-mcp",
     "source": "github"
@@ -12,7 +12,7 @@
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://mcp.apify.com/?tools=fetch-actor-details,tubetext/youtube-transcript-fast,tubetext/youtube-channel-analytics,tubetext/socialblade-scraper,tubetext/shot-by-shot-video-analysis",
+      "url": "https://mcp.apify.com/?tools=fetch-actor-details,tubetext/youtube-transcript-fast,tubetext/youtube-tiktok-comments-api,tubetext/youtube-channel-analytics,tubetext/socialblade-scraper,tubetext/shot-by-shot-video-analysis",
       "headers": [
         {
           "name": "Authorization",
