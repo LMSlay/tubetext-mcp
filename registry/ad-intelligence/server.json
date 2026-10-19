@@ -1,8 +1,8 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.LMSlay/tubetext-ad-intelligence",
-  "title": "Meta Ad Library & Video Ad Analyzer",
-  "description": "Meta Ad Library ads plus AI teardowns and shot-by-shot analysis of Meta and YouTube video ads.",
+  "title": "Meta Ad Library, Google Ads Transparency & Video Ad Analyzer",
+  "description": "Meta Ad Library and Google Ads Transparency video ads, plus AI teardowns and shot-by-shot analysis.",
   "repository": {
     "url": "https://github.com/LMSlay/tubetext-mcp",
     "source": "github"
@@ -12,7 +12,7 @@
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://mcp.apify.com/?tools=fetch-actor-details,tubetext/meta-ad-library-videos,tubetext/video-ad-analyzer,tubetext/shot-by-shot-video-analysis",
+      "url": "https://mcp.apify.com/?tools=fetch-actor-details,tubetext/meta-ad-library-videos,tubetext/google-ads-transparency-video,tubetext/video-ad-analyzer,tubetext/shot-by-shot-video-analysis",
       "headers": [
         {
           "name": "Authorization",

@@ -5,7 +5,7 @@ TubeText servers are **remote** MCP servers hosted on Apify (`mcp.apify.com`, St
 ## 1. Pick a server URL
 Choose the bundle that matches the user's request (full list in README.md → "Server URLs"):
 - TikTok transcripts, comments + AI video breakdown: `https://mcp.apify.com/?tools=fetch-actor-details,tubetext/tiktok-transcript,tubetext/youtube-tiktok-comments-api,tubetext/video-breakdown-ai,tubetext/shot-by-shot-video-analysis`
-- YouTube transcripts, comments + channel analytics: `https://mcp.apify.com/?tools=fetch-actor-details,tubetext/youtube-transcript-fast,tubetext/youtube-tiktok-comments-api,tubetext/youtube-channel-analytics,tubetext/socialblade-scraper,tubetext/shot-by-shot-video-analysis`
+- YouTube transcripts, comments + channel analytics: `https://mcp.apify.com/?tools=fetch-actor-details,tubetext/youtube-transcript-fast,tubetext/youtube-shorts-scraper,tubetext/youtube-tiktok-comments-api,tubetext/youtube-channel-analytics,tubetext/socialblade-scraper,tubetext/shot-by-shot-video-analysis`
 - For the other 7 bundles (social video transcripts, ad intelligence, e-commerce prices, reviews, China data, travel prices, esports match data), copy the URL from README.md.
 
 ## 2. Authentication
