@@ -79,6 +79,8 @@ For a first captions-only task, ask:
 
 AI fallback is enabled by default in the YouTube Actor, so set `aiFallback: false` explicitly for captions-only work. This does not make the run free. After retrieval, retain the run ID, dataset ID and original export before using the text downstream. For a channel-to-RAG workflow, use the [replay-safe caption inbox example](https://github.com/LMSlay/tubetext-examples/tree/main/python/youtube_incremental_rag), which includes synthetic offline tests rather than a live-service benchmark.
 
+For the workflow overview and recovery checklist, read the [YouTube transcript RAG guide](https://tubetext.dev/youtube-transcript-rag/).
+
 ## Example prompts
 
 - "Get the transcript of this TikTok and break down its hook and shot list: <url>"
