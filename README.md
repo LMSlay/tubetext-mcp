@@ -2,7 +2,7 @@
 
 Remote MCP servers that give Claude, Cursor, VS Code, ChatGPT and any other MCP client access to [TubeText](https://apify.com/tubetext) tools: video transcripts, comment sentiment, AI video breakdowns, esports match timelines, ad library data, e-commerce prices, reviews, China data and travel prices.
 
-There is nothing to install or host. Each server is a URL on Apify's hosted MCP server (`mcp.apify.com`) that exposes a small, focused set of TubeText Actors as tools. You sign in with your own Apify account (OAuth) or pass your Apify API token. You pay per result at each Actor's Store price, with a free monthly credit on every Apify account.
+There is nothing to install or host. Each server is a URL on Apify's hosted MCP server (`mcp.apify.com`) that exposes a small, focused set of TubeText Actors as tools. You sign in with your own Apify account (OAuth) or pass your Apify API token. Usage is billed under each Actor's current Store pricing and your Apify plan. Review billable events and any optional AI processing before running a tool.
 
 ## Servers
 
@@ -27,7 +27,7 @@ claude mcp add --transport http tubetext-tiktok "https://mcp.apify.com/?tools=fe
 
 **Claude Desktop / claude.ai**: Settings → Connectors → Add custom connector → paste a server URL from the list below, then sign in to Apify.
 
-**Cursor / VS Code / other clients** (`mcp.json`):
+**Remote MCP clients (generic example)**:
 ```json
 {
   "mcpServers": {
@@ -37,6 +37,8 @@ claude mcp add --transport http tubetext-tiktok "https://mcp.apify.com/?tools=fe
   }
 }
 ```
+Client configuration paths and schemas differ. Use the [Apify MCP configurator](https://mcp.apify.com/) for your client rather than assuming this JSON works unchanged everywhere. See the [VS Code configuration reference](https://code.visualstudio.com/docs/agents/reference/mcp-configuration) for its supported format.
+
 Clients without OAuth: add the header `Authorization: Bearer <your Apify API token>` ([get one here](https://console.apify.com/account/integrations)).
 
 ### Server URLs
@@ -50,6 +52,16 @@ Clients without OAuth: add the header `Authorization: Bearer <your Apify API tok
 - **China Data: Taobao, Bilibili, WeChat, Trending**: `https://mcp.apify.com/?tools=fetch-actor-details,tubetext/taobao-tmall-scraper,tubetext/bilibili-scraper,tubetext/bilibili-video-transcript,tubetext/china-trending-topics,tubetext/wechat-articles-scraper,tubetext/alibaba-yiwu-image-search`
 - **Travel & Local Prices: Flights, Hotels, Gas**: `https://mcp.apify.com/?tools=fetch-actor-details,tubetext/google-flights-scraper,tubetext/google-hotels-scraper,tubetext/gas-prices-scraper`
 - **Esports Match Timelines: Valorant & CS2**: `https://mcp.apify.com/?tools=fetch-actor-details,tubetext/esports-match-timeline,tubetext/youtube-transcript-fast,tubetext/youtube-tiktok-comments-api`
+
+## Start with a bounded YouTube use case
+
+Before any paid test, list the available tools and inspect the current input schema for `tubetext/youtube-transcript-fast`. Connecting or seeing a directory listing does not establish that an Actor run will succeed. If a requested tool is absent, stop and check the selected bundle instead of silently substituting another Actor.
+
+For a first captions-only task, ask:
+
+> Get the existing captions for this one public YouTube video: <url>. Set `aiFallback` to false; do not enable AI transcription or run other Actors. Return the transcript with source timestamps, or explain the unsuccessful status without inventing missing text. Show the planned input and cost limit before starting.
+
+AI fallback is enabled by default in the YouTube Actor, so set `aiFallback: false` explicitly for captions-only work. This does not make the run free. After retrieval, retain the run ID, dataset ID and original export before using the text downstream. For a channel-to-RAG workflow, use the [replay-safe caption inbox example](https://github.com/LMSlay/tubetext-examples/tree/main/python/youtube_incremental_rag), which includes synthetic offline tests rather than a live-service benchmark.
 
 ## Example prompts
 
@@ -66,9 +78,9 @@ Clients without OAuth: add the header `Authorization: Bearer <your Apify API tok
 
 ## Costs and safety
 
-- Every tool is a pay-per-event Apify Actor. Each Actor's Store page lists its price. Failed or empty results are not billed.
-- The Actors accept a maximum cost per run and stop cleanly when they reach it. The MCP server sets no cap of its own, so ask your agent to pass `maxTotalChargeUsd` for large jobs.
-- No login or cookies are used. The tools read public pages only.
+- Actor calls can incur charges. Check the selected Actor's live Pricing tab: skipping a transcript or analysis event does not guarantee a zero-cost run. Actor Start, data-fetch events, optional AI work or other charges may still apply.
+- Agree on a budget before starting, not just for large jobs. Inspect the current tool schema for supported run limits. For Apify's generic `call-actor` tool, limits such as `maxTotalChargeUsd` belong in `callOptions`, not in the Actor input ([official reference](https://docs.apify.com/mcp)). Do not assume every Actor wrapper exposes the same fields or that a run limit caps downstream model, storage or integration costs.
+- Apify authentication is required for ordinary account-billed runs. These public-data workflows do not require you to provide a social-network login or cookies. Never paste API tokens into prompts, public issues or committed files.
 
 ## Feedback
 
